@@ -1,0 +1,257 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Hunt</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://i.postimg.cc/gcTVS86D/1738657520755.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* Glow effect for text */
+        h1, h2 {
+            color: #ffcc00;
+            text-shadow: 0 0 15px #ffcc00, 0 0 30px #ff9900, 0 0 45px #ff9900;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Smooth fade-in animation */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 20px;
+            background: #ffcc00;
+            color: #333;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.4s;
+            cursor: pointer;
+            border: none;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background: #ff9900;
+            transform: scale(1.05);
+        }
+
+        .riddle-box, .final-box {
+            display: none;
+        }
+
+        input[type="text"] {
+            width: 60%;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            border: none;
+        }
+        input[type="text"], .message {
+    background-color: rgba(0, 0, 0, 0.7); 
+    color: white;
+}
+
+        .message {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        .correct {
+            color: #32cd32;
+        }
+
+        .wrong {
+            color: #ff6347;
+        }
+
+        .clue-images img {
+            width: 180px;
+            height: 180px;
+            margin: 15px;
+            border-radius: 10px;
+            border: 3px solid white;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .clue-images img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Popup Style */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.9);
+            text-align: center;
+            color: white;
+            animation: popUp 0.5s ease-out;
+        }
+
+        @keyframes popUp {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .popup h2 {
+            color: #f2c911;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .popup .button {
+            background: #32cd32;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 20px;
+        }
+
+        .popup .button:hover {
+            background: #228b22;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Page -->
+    <div class="container" id="welcome-box">
+        <h1> HEXCORE HUNT</h1>
+        <p>Are you ready for the challenge?</p>
+        <button class="button" onclick="startHunt()">Start the Treasure Hunt</button>
+    </div>
+
+    <!-- Riddle 1 -->
+    <div class="container riddle-box" id="riddle1">
+        <h2>🔑 Riddle 1</h2>
+        <p>what goes up but never  comes down ? ?</p>
+        <input type="text" id="answer1" placeholder="Enter your answer">
+        <button class="button" onclick="checkAnswer(1, 'age')">Submit</button>
+        <p id="message1" class="message"></p>
+    </div>
+
+    <!-- Riddle 2 -->
+    <div class="container riddle-box" id="riddle2">
+        <h2>🔑 Riddle 2</h2>
+        <p> I am light as feather yet the strongest person cant hold me for 5 minute ??</p>
+        <input type="text" id="answer2" placeholder="Enter your answer">
+        <button class="button" onclick="checkAnswer(2, 'breathe')">Submit</button>
+        <p id="message2" class="message"></p>
+    </div>
+
+    <!-- Riddle 3 (Famous Place) -->
+    <div class="container riddle-box" id="riddle3">
+        <h2>🔑 Riddle 3</h2>
+        <p>
+            What has cities, but no houses; forests, but no trees; and water, but no fish?<br>
+        </p>
+        <input type="text" id="answer3" placeholder="Enter the answer ">
+        <button class="button" onclick="checkAnswer(3, 'map')">Submit</button>
+        <p id="message3" class="message"></p>
+    </div>
+
+    
+    <div class="container riddle-box" id="riddle4">
+        <h2>🔑 Riddle 4</h2>
+        <p>
+            I'm from the 11th movie of Nolan, <br>
+            where space and time collide,<br>
+            I'm the first to orbit a black hole's tide. <br>
+            A water world with waves so grand<br>
+        </p>
+        <input type="text" id="answer4" placeholder="WHO AM I?">
+        <button class="button" onclick="checkAnswer(4, 'miller\'s planet', true)">Submit</button>
+        <p id="message4" class="message"></p>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <h2>🎉 Congrats! You Got It!</h2>
+        <p>You found the Location!</p>
+        <button class="button" onclick="showFinalLocation()">See the Location</button>
+    </div>
+
+    <!-- Final Location Page -->
+    <div class="container final-box" id="final-box">
+        <h1>🎉 You Found the Location!</h1>
+        <div class="clue-images">
+            <img src="https://i.postimg.cc/rpfPtdtz/download.jpg" alt="Clue 1">
+            <img src="https://i.postimg.cc/fLFqB6CN/q-QL4-TX52f-Wnah-W8-Mt-X8-Ho-R.jpg" alt="Clue 2">
+        </div>
+        <p><strong>📍 Location:</strong> Naipunnya Nursery</p>
+        <p><strong>🎬 Movie Dialogue:</strong> പെട്ടെന്നു തീർത്താൽ..... ഉടനേ അടുത്ത പണി തരാം...
+    </div>
+
+    <script>
+        function startHunt() {
+            document.getElementById("welcome-box").style.display = "none";
+            document.getElementById("riddle1").style.display = "block";
+        }
+        function checkAnswer(riddleNum, correctAnswer, isLast = false) {
+            var answerInput = document.getElementById("answer" + riddleNum);
+            var message = document.getElementById("message" + riddleNum);
+            var answer = answerInput.value.toLowerCase().trim();
+
+            if (answer === correctAnswer) {
+                message.innerHTML = "✅ Correct!";
+                message.className = "message correct";
+                setTimeout(() => {
+                    document.getElementById("riddle" + riddleNum).style.display = "none";
+                    if (isLast) {
+                        document.getElementById("popup").style.display = "block";
+                    } else {
+                        document.getElementById("riddle" + (riddleNum + 1)).style.display = "block";
+                    }
+                }, 100);
+            } else {
+                message.innerHTML = "❌ Wrong answer! Try again.";
+                message.className = "message wrong";
+            }
+        }
+
+        function showFinalLocation() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("final-box").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
